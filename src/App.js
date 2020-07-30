@@ -1,24 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TableSections from "./components/TableSections";
+import CourseFrame from "./components/CourseFrame";
+import SectionFrame from "./components/SectionFrame";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <TableSections/>
+        <div className="controls d-flex flex-row">
+            <CourseFrame />
+            <SectionFrame/>
+        </div>
     </div>
   );
 }
