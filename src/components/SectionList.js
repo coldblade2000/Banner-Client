@@ -47,7 +47,7 @@ const onListItemClick= (section, updateSection)=>{
 
 const mapStateToProps = (state)=>{
     return {
-        sections: state.sections
+        sections: state.sections.filter((section)=>section.identifier===state.selectedCourse)
     }
 }
 

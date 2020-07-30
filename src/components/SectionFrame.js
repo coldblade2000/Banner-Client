@@ -10,6 +10,7 @@ import {addedSection} from "../redux/actions";
 import CourseList from "./CourseList";
 import {findOneSection} from "../requester";
 import SectionList from "./SectionList";
+import Section from "../model/Section";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,8 +53,11 @@ const addClick = (addedSection, selectedCourse) => {
     const addedCRN = prompt("What is the CRN of the section?")
     try {
         if (addedCRN.length === 5) {
-            findOneSection(selectedCourse, parseInt(addedSection))
-                .then((section)=>addedSection(section))
+            findOneSection(selectedCourse, parseInt(addedCRN))
+                .then((section)=>{
+                    console.log(section)
+                    addedSection(section)
+                })
         } else {
             throw new Error('Not a valid CRN')
         }

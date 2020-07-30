@@ -33,3 +33,9 @@ export const updateSection = (section)=>{
         payload:section
     }
 }
+export const selectCourse = (courseIdentifier)=>{
+    return{
+        type:types.SELECTED_COURSE,
+        payload: courseIdentifier
+    }
+}

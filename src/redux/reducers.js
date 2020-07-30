@@ -26,7 +26,7 @@ const courseReducer = (state = [], action)=>{
         case types.ADDED_SECTION:
             for (let i = 0; i < newCourseArray.length; i++) {
                 const course = newCourseArray[i]
-                if(course.CRNs.contains(action.payload.CRN)){
+                if(course.getIdentifier() === action.payload.identifier){
                     doesExist = true
                     course.CRNs.push(action.payload.CRN)
                     newCourseArray[i] = course
@@ -38,7 +38,7 @@ const courseReducer = (state = [], action)=>{
         case types.REMOVED_SECTION:
             for (let i = 0; i < newCourseArray.length; i++) {
                 const course = newCourseArray[i]
-                if(course.CRNs.contains(action.payload)){
+                if(course.CRNs.includes(action.payload)){
                     doesExist = true
                     course.CRNs = course.CRNs.filter((crn)=>crn !== action.payload)
                     newCourseArray[i] = course
@@ -53,11 +53,12 @@ const courseReducer = (state = [], action)=>{
 }
 
 const sectionReducer = (state=[], action)=>{
+    let doesExist;
     let newSectionArray = [...state]
 
     switch (action.type) {
         case types.ADDED_SECTION:
-            let doesExist = false
+            doesExist = false;
             //If the section exists already, it is updated
             for (let i = 0; i < newSectionArray.length; i++) {
                 const section = newSectionArray[i]
@@ -115,7 +116,19 @@ const sectionReducer = (state=[], action)=>{
 }*/
 
 const selectCourseReducer = (state= null, action)=>{
-    return action.payload || state
+    switch (action.type) {
+        case types.ADDED_SECTION:
+            return state
+        case types.REMOVED_COURSE:
+            return null
+        case types.ADDED_COURSE:
+            return action.payload
+        case types.SELECTED_COURSE:
+            return action.payload
+        case types.UPDATE_SECTION:
+            return state
+    }
+    return state
 }
 
 export default combineReducers({

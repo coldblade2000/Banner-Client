@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {connect} from 'react-redux'
-import {removedCourse, updateSection} from "../redux/actions";
+import {removedCourse, selectCourse, updateSection} from "../redux/actions";
 import {findCourseOne} from '../requester'
 
 const CourseList = (props)=>{
@@ -22,17 +22,17 @@ const CourseList = (props)=>{
             <List>
                 {props.courses.map((course)=>
                     <ListItem
-                        key={course.getIdentifier()}
+                        key={course.courseCode+course.courseNumber}
                     button
-                    selected={props.selectedCourse===course.identifier}
-                    onClick={()=>onListItemClick(course)}>
+                    selected={props.selectedCourse===course.courseCode+course.courseNumber}
+                    onClick={()=>onListItemClick(course, props.updateSection, props.selectCourse)}>
                         <ListItemText
                             primary={course.getIdentifier()}
                             // secondary={? 'Secondary text' : null}
                         />
                         <ListItemSecondaryAction>
                             <IconButton edge="end" aria-label="delete">
-                                <DeleteIcon onClick={()=>props.removedCourse(course.getIdentifier())}/>
+                                <DeleteIcon onClick={()=>props.removedCourse(course.courseCode+course.courseNumber)}/>
                             </IconButton>
                         </ListItemSecondaryAction>
                     </ListItem>,
@@ -42,9 +42,10 @@ const CourseList = (props)=>{
     )
 }
 
-const onListItemClick= (course, updateSection)=>{
+const onListItemClick= (course, updateSection, selectCourse)=>{
+    selectCourse(course.courseCode+course.courseNumber)
     findCourseOne(course).then((sections)=>{
-        sections.forEach(updateSection)
+        sections.forEach((section)=>updateSection(section))
     })
 }
 
@@ -55,4 +56,4 @@ const mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps, {removedCourse})(CourseList)
+export default connect(mapStateToProps, {removedCourse, updateSection, selectCourse})(CourseList)

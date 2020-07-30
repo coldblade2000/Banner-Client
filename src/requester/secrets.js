@@ -1,3 +1,3 @@
-export const JSESSIONID = 'ADCF498D15FA330C519499D1E3166F36'
+export const JSESSIONID = 'D60624B57D433B6D3F977C020CA2D2F8'
 export const Cookie = `JSESSIONID=${JSESSIONID}; __utma=154978747.997165586.1555104980.1555104980.1555104980.1; _ga=GA1.3.997165586.1555104980; __utmz=154978747.1589237577.2.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _gid=GA1.3.1488063527.1595094619`
-export const XSynchronizerToken = '744fd34e-f160-4123-97b7-d5211b515143'
+export const XSynchronizerToken = 'a358ca53-50ed-4e2c-893b-cb5abaf5c18f'
