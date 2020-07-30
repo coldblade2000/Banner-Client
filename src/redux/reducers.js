@@ -11,7 +11,7 @@ const courseReducer = (state = [], action)=>{
         case types.ADDED_COURSE:
             for (let i = 0; i < newCourseArray.length; i++) {
                 const course = newCourseArray[i]
-                if (course.hasSameIdentifier(action.payload)) {
+                if (course.courseCode+course.courseNumber ===(action.payload)) {
                     doesExist = true
                     console.log(`Course with identifier of ${action.payload} already exists`)
                     break;
@@ -26,7 +26,7 @@ const courseReducer = (state = [], action)=>{
         case types.ADDED_SECTION:
             for (let i = 0; i < newCourseArray.length; i++) {
                 const course = newCourseArray[i]
-                if(course.getIdentifier() === action.payload.identifier){
+                if(course.courseCode+course.courseNumber === action.payload.identifier){
                     doesExist = true
                     course.CRNs.push(action.payload.CRN)
                     newCourseArray[i] = course
@@ -74,7 +74,7 @@ const sectionReducer = (state=[], action)=>{
             return newSectionArray
         case types.REMOVED_SECTION:
             newSectionArray =  state.filter(section=>{
-                return !section.CRN === action.payload
+                return section.CRN !== action.payload
             })
             return newSectionArray
         case types.REMOVED_COURSE:

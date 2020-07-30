@@ -27,7 +27,7 @@ const CourseList = (props)=>{
                     selected={props.selectedCourse===course.courseCode+course.courseNumber}
                     onClick={()=>onListItemClick(course, props.updateSection, props.selectCourse)}>
                         <ListItemText
-                            primary={course.getIdentifier()}
+                            primary={course.courseCode+course.courseNumber}
                             // secondary={? 'Secondary text' : null}
                         />
                         <ListItemSecondaryAction>
